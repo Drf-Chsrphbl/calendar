@@ -14,4 +14,5 @@ export async function createEvent(name: string, desc: string, t: string) {
         values(${name},${desc},${t})`
     
     );
+    return result
 }

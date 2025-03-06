@@ -1,7 +1,7 @@
-import Counter from "@/components/Counter";
+//import Counter from "@/components/Counter";
 import Sidebar from "@/components/Sidebar";
 import SubmitButton from "@/components/SubmitButton";
-import Image from "next/image";
+//import Image from "next/image";
 
 // This export represents the only function that is leaving to the frontend
 // these tailwind classes put our button on the  center of the screen

@@ -1,5 +1,5 @@
 "use client"
-import Counter from "@/components/Counter";
+//import Counter from "@/components/Counter";
 import Sidebar from "@/components/Sidebar";
 
 import { useState} from "react";

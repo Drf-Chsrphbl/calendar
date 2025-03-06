@@ -1,14 +1,14 @@
 "use client"
-import React, {useState} from 'react';
+import React, { useState} from 'react';
 
 export default function SubmitButton(){
     const [userInput,setUserInput] = useState("")
 
-    const [toDoList, setToDoList] = useState([])
+    const [toDoList, setToDoList] = useState<string[]>([])
 
-    const [isChecked, setIsChecked] = useState(false)
+    //const [isChecked, setIsChecked] = useState(false)
     
-    const handleChange = (e) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement >) => {
         // prevents form to reload when event is submitted
         e.preventDefault()
 
@@ -17,7 +17,7 @@ export default function SubmitButton(){
         setUserInput(e.target.value)
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (e: React.FormEvent<HTMLElement>) => {
         // we do not want to refresh pag everytime we submit
         e.preventDefault()
 
@@ -29,25 +29,26 @@ export default function SubmitButton(){
     }
     // passing current toDo and creates a new updated list 
     // the updated list only takes in elements in the old list that is not equal to the toDo element parameter 
-    const handleDelete = (toDo) => {
+    const handleDelete = (toDo: string) => {
         //const updatedList = toDoList.filter((toDoItem) => toDoList.indexOf(toDoItem) != toDoList.indexOf(toDo))
         const updatedList = toDoList.filter(toDoItem => toDoItem != toDo)
         setToDoList(updatedList)
     }
+
     
     // onChange tracks changes made to the input element
     // onClick handles click events 
     return(
         <div>
-            <form className="bg-gray-200 border-2 border-solid border-black rounded-3xl">
+            <div className="bg-gray-200 border-2 border-solid border-black rounded-3xl">
                 <input type="text" value={userInput} placeholder={"Enter a task"} onChange={handleChange} className="w-96 p-3 text-lg bg-transparent focus:outline-none"/>
-                <button onClick={handleSubmit} className="p-2 font-bold rounded-3xl">ADD</button>
-            </form>
+                <button type='submit' onClick={handleSubmit} className="p-2 font-bold rounded-3xl">ADD</button>
+            </div>
             <ul>
                 {
                     toDoList.length >= 1 ? toDoList.map( (toDo, index) => {
                         return(
-                            <li><input type="checkbox" onClick={(e)=>{
+                            <li key={index}><input type="checkbox" onClick={(e)=>{
                                 e.preventDefault()
                                 handleDelete(toDo)}} 
                                 

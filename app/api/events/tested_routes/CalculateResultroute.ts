@@ -5,7 +5,7 @@ export async function GET(request: NextRequest){
     if (password !== "password"){
         return NextResponse.json({error: "Unauthorised"}, { status:401 })
     }
-    const a = request.nextUrl.searchParams.get("a")
-    const b = request.nextUrl.searchParams.get("b")
+    const a = request.nextUrl.searchParams.get("a")!
+    const b = request.nextUrl.searchParams.get("b")!
     return NextResponse.json({ result: Number.parseInt(a) + Number.parseInt(b)})
 }

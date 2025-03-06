@@ -1,5 +1,5 @@
 "use client"
-import Counter from "@/components/Counter";
+//import Counter from "@/components/Counter";
 import Sidebar from "@/components/Sidebar";
 
 import { useState} from "react";
@@ -10,7 +10,7 @@ export default function Home() {
 
     const[a,setA] = useState(0)
     const[b,setB] = useState(0)
-    const [result,setResult] = useState(0)
+    //const [result,setResult] = useState(0)
 
     async function calculate(){
         // await is saying wait for the fetch to be completly finished first
@@ -37,7 +37,7 @@ export default function Home() {
         <p>B:</p>
         <input value={b.toString()} onChange={e => setB(Number.parseInt(e.target.value || "0"))} className="p-2 rounded shadow"/>
         <button onClick={calculate}>Calculate</button>
-        <p>Result={result}</p>
+        <p>Result={0}</p>
       </div>
     </div>
   );

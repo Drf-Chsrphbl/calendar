@@ -3,10 +3,9 @@
 "use client" 
 
 import _ from "lodash";
-import { useState} from "react";
 
 export function Calendar() {
-    const [date, setDate] = useState(new Date())
+    //const [date, setDate] = useState(new Date())
     
     // or big-[#hex code] for customised colour
     // can use px or rem (rem is adjusted proportionally)
@@ -21,7 +20,7 @@ export function Calendar() {
             <p>Fri</p>
             <p>Sat</p>
 
-            {[_.range(31).map(v => <p>{v + 1}</p>)]}
+            {[_.range(31).map((v, i) => <p key={i}>{v + 1}</p>)]}
         </div>
 
     )
