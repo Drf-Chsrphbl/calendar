@@ -18,10 +18,10 @@ export default function Sidebar(){
                 <div className="flex flex-col items-center">
                     {/* Sidebar items */}
                     <div className='mt-4'>
-                        <a href='#' className='text-white font-bold hover:text-gray-300'> Home</a>
+                        <a href='/' className='text-white font-bold hover:text-gray-300'> Home</a>
                     </div>
                     <div className='mt-4'>
-                        <a href='#' className='text-white font-bold hover:text-gray-300'> Completed</a>
+                        <a href='/completedPage' className='text-white font-bold hover:text-gray-300'> Completed</a>
                     </div>
                     <div className='mt-4'>
                         <a href='#' className='text-white font-bold hover:text-gray-300'> Help</a>
@@ -32,7 +32,7 @@ export default function Sidebar(){
 
             {/**main content */}
             <div // when sidebar is open we style it by using ml-64 to shift the sidebar to the right of the screen
-            className={`flex-1 p-4 ${ isOpen ? 'ml-64' : 'ml-0'}`}>
+            className={`flex-1 p-2 ${ isOpen ? 'ml-64' : 'ml-0'}`}>
                 {/**Button to toggle sidebar */}
                 <div // ml-auto gives max margin on the left, allowing to push the closing button to the right when sidebar opened 
                     className="ml-auto fixed">
