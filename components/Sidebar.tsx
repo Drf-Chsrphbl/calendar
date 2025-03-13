@@ -1,5 +1,5 @@
 "use client"
-
+import Link from 'next/link';
 import React, { useState } from 'react';
 
 export default function Sidebar(){
@@ -18,13 +18,14 @@ export default function Sidebar(){
                 <div className="flex flex-col items-center">
                     {/* Sidebar items */}
                     <div className='mt-4'>
-                        <a href='/' className='text-white font-bold hover:text-gray-300'> Home</a>
+        
+                        <Link href='/' className='text-white font-bold hover:text-gray-300'> Home</Link>
                     </div>
                     <div className='mt-4'>
-                        <a href='/completedPage' className='text-white font-bold hover:text-gray-300'> Completed</a>
+                        <Link href='/completedPage' className='text-white font-bold hover:text-gray-300'> Completed</Link>
                     </div>
                     <div className='mt-4'>
-                        <a href='#' className='text-white font-bold hover:text-gray-300'> Help</a>
+                        <Link href='#' className='text-white font-bold hover:text-gray-300'> Help</Link>
                     </div>
                 </div>
             
