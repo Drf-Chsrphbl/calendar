@@ -1,11 +1,32 @@
 "use client"
-import React, { useState} from 'react';
+import React, { useEffect, useState} from 'react';
+import { Task, loadUncompletedTasks } from '@/lib/database';
 
 export default function SubmitButton(){
     const [userInput,setUserInput] = useState("")
 
-    const [toDoList, setToDoList] = useState<string[]>([])
+    const [toDoList, setToDoList] = useState<Task[]>([])
 
+    useEffect(() => {
+        const fetchCompletedTasks = async () => {
+          try{
+            const tasks = await loadUncompletedTasks();
+            console.log(tasks)
+            const sortedTasks = tasks.sort((a, b) => new Date(b.start_time).getTime() - new Date(a.start_time).getTime());
+            setToDoList(sortedTasks);
+    
+          } catch (error) {
+            console.error('Error fetching uncompleted tasks:',error)
+          }
+        };
+        fetchCompletedTasks();
+        
+      })
+    
+    
+    
+    
+    
     //const [isChecked, setIsChecked] = useState(false)
     
     const handleChange = (e: React.ChangeEvent<HTMLInputElement >) => {
@@ -28,16 +49,11 @@ export default function SubmitButton(){
                 body: JSON.stringify({ description: userInput }),
             });
         
-        
             if (!response.ok){
                 throw new Error('Failed to add task to the database')
             }
             const data = await response.json();
             console.log('Task added to database:', data);
-            // most recent input is added to the start of the list 
-            // spread operator (...) creates a new array adding all the previous items into the new array
-            setToDoList([userInput,...toDoList]);
-            setUserInput("");
         } catch(error){
             console.error("error adding task:",error)
         }
@@ -45,7 +61,7 @@ export default function SubmitButton(){
     }
     // passing current toDo and creates a new updated list 
     // the updated list only takes in elements in the old list that is not equal to the toDo element parameter 
-    const handleDelete = async (toDo: string) => {
+    const handleDelete = async (toDo_Description: string) => {
         try{
             // send PUT request to change the task status completed to true
             const response = await fetch(`/api/events`,{
@@ -53,7 +69,7 @@ export default function SubmitButton(){
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({description: toDo, completed: true})
+                body: JSON.stringify({description: toDo_Description, completed: true})
             })
 
             if (!response.ok) {
@@ -63,8 +79,8 @@ export default function SubmitButton(){
             const data = await response.json();
             console.log('Task updated in database:', data);
 
-            const updatedList = toDoList.filter(toDoItem => toDoItem != toDo)
-            setToDoList(updatedList)
+            // const updatedList = toDoList.filter(toDoItem => toDoItem != toDo)
+            // setToDoList(updatedList)
         } catch(error){
             console.log('Error updating task:',error)
         }
@@ -87,9 +103,9 @@ export default function SubmitButton(){
                         return(
                             <li key={index}><input type="checkbox" onClick={(e)=>{
                                 e.preventDefault()
-                                handleDelete(toDo)}} 
+                                handleDelete(toDo.description)}} 
                                 
-                                key={index}/>{toDo}</li>
+                                key={index}/> {toDo.description}</li>
                         )
 
                     })

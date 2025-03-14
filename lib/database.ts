@@ -38,11 +38,20 @@ export async function updateTaskCompletion(desc: string, completed: boolean) {
     return result;
 }
 
-export async function loadCompletedTasks() {
+export async function loadCompletedTasks(days:number) {
     const result = await sql(
         `SELECT * FROM task
          WHERE completed = true
-         AND start_time >= NOW() - INTERVAL '30 days'
+         AND start_time >= NOW() - INTERVAL '${days} days'
+        `
+    );
+    return result as Task[]
+}
+
+export async function loadUncompletedTasks() {
+    const result = await sql(
+        `SELECT * FROM task
+         WHERE completed = false
         `
     );
     return result as Task[]

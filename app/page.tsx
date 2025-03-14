@@ -11,9 +11,11 @@ export default function Home() {
   return (
     <div>
       
-      <div className="flex justify-between items-start p-2">
+      <div className="flex justify-between items-start">
         <Sidebar/>
-        <SignIn/>
+        <div className="p-2"><SignIn/></div>
+        
+        
       </div>
       
       <div className="flex flex-col gap-4 items-center justify-center ml-5 w-full h-screen ">

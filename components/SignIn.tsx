@@ -1,7 +1,7 @@
 "use client";
 
 import { signIn, signOut, useSession } from "next-auth/react";
-
+import GoogleLogo from "@/components/google-logo.webp"
 export default function SignIn() {
   const { data: session } = useSession(); // Get session data (user info)
 
@@ -20,9 +20,10 @@ export default function SignIn() {
         // If not logged in, show the Sign in with Google button
         <button
           onClick={() => signIn("google")}
-          className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition active:bg-slate-700"
+          className="flex items-center px-4 py-2 bg-black text-white rounded-lg hover:bg-blue-950 transition active:bg-slate-700"
         >
-          Sign in with Google
+          <img src={GoogleLogo.src} alt="Google Logo" className="w-5 h-5 mr-2" />
+          <span>Sign in with Google</span>
         </button>
       )}
     </div>
