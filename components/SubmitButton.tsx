@@ -54,6 +54,7 @@ export default function SubmitButton(){
             }
             const data = await response.json();
             console.log('Task added to database:', data);
+            setUserInput("")
         } catch(error){
             console.error("error adding task:",error)
         }
